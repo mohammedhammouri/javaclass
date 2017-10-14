@@ -15,9 +15,9 @@ public class Main {
 //        ArrayList<Student> students = new ArrayList<>(10);//set inital size of 10 students this is what we expect
         //better for performance
 
-
         askForInput();
 
+        //some test
         for (int i = 0; i < parsers.size(); i++) {
             IOParser parser = parsers.get(i);
             System.out.println(parser.getOutput());
