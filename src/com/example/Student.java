@@ -1,5 +1,7 @@
 package com.example;
 
+import java.util.Scanner;
+
 public class Student implements IOParser {
 
 
@@ -32,10 +34,11 @@ public class Student implements IOParser {
     }
 
     @Override
-    public void parse(String input) {
+    public void parse(String input) throws Exception {
 
         String[] studentInfo = input.split(",");
 
+        int numOfValuesEntered = 0;
         for(int i = 1 ; i < studentInfo.length;i++){
 
             String[] keyValue = studentInfo[i].split(":");
@@ -43,17 +46,27 @@ public class Student implements IOParser {
             String value = keyValue[1];
             if(key.equalsIgnoreCase("name")){
                 setName(value);
+                numOfValuesEntered++;
             }else if(key.equalsIgnoreCase("seat")){
                 setSeatNumber(Integer.parseInt(value));
+                numOfValuesEntered++;
             }else if(key.equalsIgnoreCase("class")){
                 setClassName(value);
+                numOfValuesEntered++;
             }
-
         }
+
+        if(numOfValuesEntered < 3){
+            throw new Exception("Invalid data");
+        }
+
     }
 
     @Override
     public String getOutput() {
         return getName() + " " + getSeatNumber();
     }
+
+
+
 }
