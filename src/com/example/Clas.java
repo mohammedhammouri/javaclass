@@ -1,9 +1,24 @@
 package com.example;
 
+import java.util.List;
+
 public class Clas implements IOParser {
 
     private String name;
     private String teacherName;
+    private List<Student> students;
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
+    public void addStudent(Student student){
+        students.add(student);
+    }
 
     public String getName() {
         return name;
@@ -34,9 +49,19 @@ public class Clas implements IOParser {
             String value = keyValue[1];
             if(key.equalsIgnoreCase("name")){
                 setName(value);
+
+                if(value == null || value.isEmpty()){
+                    throw new Exception("Invalid name");
+                }
+
                 numOfValuesEntered++;
             }else if(key.equalsIgnoreCase("teacherName")){
                 setTeacherName(value);
+
+                if(value == null || value.isEmpty()){
+                    throw new Exception("Invalid teacherName");
+                }
+
                 numOfValuesEntered++;
             }
         }
@@ -48,11 +73,35 @@ public class Clas implements IOParser {
 
     }
 
+
+
     @Override
-    public String getOutput() {
-        return getName() + " " + getTeacherName();
+    public String toString() {
+        return "Clas{" +
+                "name='" + name + '\'' +
+                ", teacherName='" + teacherName + '\'' +
+                ", students=" + students +
+                '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        Clas clas = (Clas) o;
 
+        if (name != null ? !name.equals(clas.name) : clas.name != null) return false;
+        if (teacherName != null ? !teacherName.equals(clas.teacherName) : clas.teacherName != null)
+            return false;
+        return students != null ? students.equals(clas.students) : clas.students == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (teacherName != null ? teacherName.hashCode() : 0);
+        result = 31 * result + (students != null ? students.hashCode() : 0);
+        return result;
+    }
 }

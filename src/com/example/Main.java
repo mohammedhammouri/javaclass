@@ -1,32 +1,29 @@
 package com.example;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
-    static List<IOParser> parsers = new ArrayList<>();
+    public static List<Clas> classes = new ArrayList<>();
 
     public static void main(String[] args)  {
+//        askForInput();
 
-//        ArrayList<Clas> classes = new ArrayList<>(3);//set initial size of 3 classes better for performance
-//        ArrayList<Student> students = new ArrayList<>(10);//set inital size of 10 students this is what we expect
-        //better for performance
+        classes.get(classes.size());
 
 
-        askForInput();
-
-        for (int i = 0; i < parsers.size(); i++) {
-            IOParser parser = parsers.get(i);
-            System.out.println(parser.getOutput());
+        for (int i = 0; i < classes.size(); i++) {
+            Clas c = classes.get(i);
+            System.out.println(c);
         }
     }
 
     private static void askForInput(){
 
         String input = scanner.next();
+
         while(!input.equals("done")){
 
             IOParser parser = null;
@@ -42,12 +39,32 @@ public class Main {
                 System.out.println(e.getMessage());
                 askForInput();
             }
-            parsers.add(parser);
+
+            if(parser instanceof Clas){
+                classes.add((Clas) parser);
+            }else if(parser instanceof Student){
+                Student s = (Student) parser;
+                Clas c = getClass(s.getClassName());
+                if(c != null) c.addStudent(s);
+            }
 
             input = scanner.next();
 
         }
 
+    }
+
+
+    private static Clas getClass(String className){
+        for(int i = 0 ; i < classes.size();i++){
+
+            Clas c = classes.get(i);
+            if(c.getName().equals(className))
+                return c;
+
+        }
+
+        return null;
     }
 
 

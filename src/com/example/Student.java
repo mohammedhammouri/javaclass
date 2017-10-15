@@ -52,6 +52,10 @@ public class Student implements IOParser {
                 numOfValuesEntered++;
             }else if(key.equalsIgnoreCase("class")){
                 setClassName(value);
+//                Clas c = getClass(value);
+//                if(c != null)
+//                    c.addStudent(this);
+//
                 numOfValuesEntered++;
             }
         }
@@ -63,10 +67,50 @@ public class Student implements IOParser {
     }
 
     @Override
-    public String getOutput() {
-        return getName() + " " + getSeatNumber();
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", seatNumber=" + seatNumber +
+                ", className='" + className + '\'' +
+                '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Student student = (Student) o;
+
+        if (seatNumber != student.seatNumber) return false;
+        if (name != null ? !name.equals(student.name) : student.name != null) return false;
+        return className != null ? className.equals(student.className) : student.className == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + seatNumber;
+        result = 31 * result + (className != null ? className.hashCode() : 0);
+        return result;
+    }
+
+    //    private Clas getClass(String className){
+//        for(int i = 0 ; i < Main.classes.size();i++){
+//
+//            IOParser parser = Main.classes.get(i);
+//
+//            if(parser instanceof Clas){
+//
+//                Clas c = (Clas) parser;
+//                if(c.getName().equals(className))
+//                    return c;
+//
+//            }
+//        }
+//
+//        return null;
+//    }
 
 
 }
