@@ -36,8 +36,8 @@ public class Clas implements IOParser {
         this.teacherName = teacherName;
     }
 
-
-    public void parse(String input) throws Exception{
+    @Override
+    public void parse(String input) throws WrongDataException, MissingDataException {
 
         String[] classInfo = input.split(",");
 
@@ -51,7 +51,7 @@ public class Clas implements IOParser {
                 setName(value);
 
                 if(value == null || value.isEmpty()){
-                    throw new Exception("Invalid name");
+                    throw new WrongDataException("Invalid name","name");
                 }
 
                 numOfValuesEntered++;
@@ -59,7 +59,7 @@ public class Clas implements IOParser {
                 setTeacherName(value);
 
                 if(value == null || value.isEmpty()){
-                    throw new Exception("Invalid teacherName");
+                    throw new WrongDataException("Invalid teacherName","teachName");
                 }
 
                 numOfValuesEntered++;
@@ -67,7 +67,7 @@ public class Clas implements IOParser {
         }
 
         if(numOfValuesEntered < 2){
-            throw new Exception("Invalid data");
+            throw new MissingDataException(2-numOfValuesEntered);
         }
 
 
