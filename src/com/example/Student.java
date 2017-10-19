@@ -34,7 +34,7 @@ public class Student implements IOParser {
     }
 
     @Override
-    public void parse(String input) throws Exception {
+    public void parse(String input) throws WrongDataException,MissingDataException {
 
         String[] studentInfo = input.split(",");
 
@@ -55,13 +55,13 @@ public class Student implements IOParser {
 //                Clas c = getClass(value);
 //                if(c != null)
 //                    c.addStudent(this);
-//
+
                 numOfValuesEntered++;
             }
         }
 
         if(numOfValuesEntered < 3){
-            throw new Exception("Invalid data");
+            throw new MissingDataException(3- numOfValuesEntered);
         }
 
     }
@@ -95,7 +95,7 @@ public class Student implements IOParser {
         return result;
     }
 
-    //    private Clas getClass(String className){
+//        private Clas getClass(String className){
 //        for(int i = 0 ; i < Main.classes.size();i++){
 //
 //            IOParser parser = Main.classes.get(i);
