@@ -73,8 +73,6 @@ public class Clas implements IOParser {
 
     }
 
-
-
     @Override
     public String toString() {
         return "Clas{" +
