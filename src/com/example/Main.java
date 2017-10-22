@@ -18,7 +18,7 @@ public class Main {
 
         askForInput();
 
-        //rinad ssssttt
+        //rinad ssssttttt
         for (int i = 0; i < parsers.size(); i++) {
             IOParser parser = parsers.get(i);
             System.out.println(parser.getOutput());
