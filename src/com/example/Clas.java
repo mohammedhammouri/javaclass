@@ -70,7 +70,6 @@ public class Clas implements IOParser {
             throw new MissingDataException(2-numOfValuesEntered);
         }
 
-
     }
 
     @Override

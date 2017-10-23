@@ -15,14 +15,14 @@ public class Main {
 
     public static void main(String[] args)  {
 
-//        Sth doSth = new DoSth();
-//        Sth doSth2 = new DoSth2();
-//        Sth doSth3 = new DoSth3();
-//
-//        doSth.setNextInChain(doSth2);
-//        doSth2.setNextInChain(doSth3);
+        Sth doSth = new DoSth();
+        Sth doSth2 = new DoSth2();
+        Sth doSth3 = new DoSth3();
 
-//        doSth.execute();
+        doSth.setNextInChain(doSth2);
+        doSth2.setNextInChain(doSth3);
+
+        doSth.execute();
 
 
         askForInput();

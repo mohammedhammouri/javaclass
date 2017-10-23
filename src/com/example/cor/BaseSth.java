@@ -2,18 +2,18 @@ package com.example.cor;
 
 public abstract class BaseSth implements Sth{
 
-    private Sth sth;
+    private Sth next;
     @Override
-    public void setNextInChain(Sth sth) {
-        this.sth = sth;
+    public void setNextInChain(Sth next) {
+        this.next = next;
     }
 
     @Override
     public boolean execute() {
-        if(sth == null)
+        if(next == null)
             return false;
 
-        return sth.execute();
+        return next.execute();
     }
 
 }
