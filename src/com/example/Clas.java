@@ -2,7 +2,7 @@ package com.example;
 
 import java.util.List;
 
-public class Clas implements IOParser {
+public class Clas {
 
     private String name;
     private String teacherName;
@@ -34,42 +34,6 @@ public class Clas implements IOParser {
 
     public void setTeacherName(String teacherName) {
         this.teacherName = teacherName;
-    }
-
-    @Override
-    public void parse(String input) throws WrongDataException, MissingDataException {
-
-        String[] classInfo = input.split(",");
-
-        int numOfValuesEntered = 0;
-
-        for(int i = 1 ; i < classInfo.length;i++){
-            String[] keyValue = classInfo[i].split(":");
-            String key = keyValue[0];
-            String value = keyValue[1];
-            if(key.equalsIgnoreCase("name")){
-                setName(value);
-
-                if(value == null || value.isEmpty()){
-                    throw new WrongDataException("Invalid name","name");
-                }
-
-                numOfValuesEntered++;
-            }else if(key.equalsIgnoreCase("teacherName")){
-                setTeacherName(value);
-
-                if(value == null || value.isEmpty()){
-                    throw new WrongDataException("Invalid teacherName","teachName");
-                }
-
-                numOfValuesEntered++;
-            }
-        }
-
-        if(numOfValuesEntered < 2){
-            throw new MissingDataException(2-numOfValuesEntered);
-        }
-
     }
 
     @Override

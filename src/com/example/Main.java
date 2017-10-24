@@ -4,14 +4,20 @@ import com.example.cor.DoSth;
 import com.example.cor.DoSth2;
 import com.example.cor.DoSth3;
 import com.example.cor.Sth;
+import com.example.mapper.ClasMapper;
+import com.example.mapper.Mapper;
+import com.example.mapper.StudentMapper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
     public static List<Clas> classes = new ArrayList<>();
+    private static ClasMapper clasMapper = new ClasMapper();
+    private static StudentMapper studentMapper = new StudentMapper();
 
     public static void main(String[] args)  {
 
@@ -40,28 +46,20 @@ public class Main {
         String input = scanner.next();
 
         while(!input.equals("done")){
+            HashMap<String,String> keyValues = new HashMap<>();
+            String[] info = input.split(",");
+            for(int i = 1 ; i < info.length;i++) {
+                String[] keyValue = info[i].split(":");
+                String key = keyValue[0];
+                String value = keyValue[1];
+                keyValues.put(key,value);
+            }
 
-            IOParser parser = null;
             if(input.startsWith("c")){
-                parser = new Clas();
+                Clas clas = clasMapper.map(keyValues);
+                classes.add(clas);
             }else if(input.startsWith("s")) {
-                parser = new Student();
-            }
-
-            try {
-                parser.parse(input);
-            } catch (WrongDataException e) {
-                System.out.println(e.getMessage());
-                askForInput();
-            } catch (MissingDataException e) {
-                System.out.println(e.getMessage());
-                askForInput();
-            }
-
-            if(parser instanceof Clas){
-                classes.add((Clas) parser);
-            }else if(parser instanceof Student){
-                Student s = (Student) parser;
+                Student s = studentMapper.map(keyValues);
                 Clas c = null;
                 try {
                     c = getClass(s.getClassName());
@@ -75,8 +73,6 @@ public class Main {
                     clas.addStudent(s);
                     classes.add(clas);
                 }
-
-
             }
 
             input = scanner.next();
