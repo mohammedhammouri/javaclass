@@ -2,8 +2,7 @@ package com.example;
 
 import java.util.Scanner;
 
-public class Student implements IOParser {
-
+public class Student {
 
     public String name;
     public int seatNumber;
@@ -31,39 +30,6 @@ public class Student implements IOParser {
 
     public void setClassName(String className) {
         this.className = className;
-    }
-
-    @Override
-    public void parse(String input) throws WrongDataException,MissingDataException {
-
-        String[] studentInfo = input.split(",");
-
-        int numOfValuesEntered = 0;
-        for(int i = 1 ; i < studentInfo.length;i++){
-
-            String[] keyValue = studentInfo[i].split(":");
-            String key = keyValue[0];
-            String value = keyValue[1];
-            if(key.equalsIgnoreCase("name")){
-                setName(value);
-                numOfValuesEntered++;
-            }else if(key.equalsIgnoreCase("seat")){
-                setSeatNumber(Integer.parseInt(value));
-                numOfValuesEntered++;
-            }else if(key.equalsIgnoreCase("class")){
-                setClassName(value);
-//                Clas c = getClass(value);
-//                if(c != null)
-//                    c.addStudent(this);
-
-                numOfValuesEntered++;
-            }
-        }
-
-        if(numOfValuesEntered < 3){
-            throw new MissingDataException(3- numOfValuesEntered);
-        }
-
     }
 
     @Override
