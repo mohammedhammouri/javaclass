@@ -1,6 +1,7 @@
 package com.example.mapper;
 
 import com.example.Clas;
+import com.example.WrongDataException;
 
 import java.util.HashMap;
 

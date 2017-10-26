@@ -7,6 +7,8 @@ import com.example.cor.Sth;
 import com.example.mapper.ClasMapper;
 import com.example.mapper.Mapper;
 import com.example.mapper.StudentMapper;
+import com.example.usecase.CreateStudent;
+import com.example.usecase.GetClass;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +21,11 @@ public class Main {
     private static ClasMapper clasMapper = new ClasMapper();
     private static StudentMapper studentMapper = new StudentMapper();
 
+    private static GetClass getClass =
+            new GetClass(classes);
+    private static CreateStudent createStudent =
+            new CreateStudent(classes,studentMapper,scanner,getClass);
+
     public static void main(String[] args)  {
 
         Sth doSth = new DoSth();
@@ -29,7 +36,6 @@ public class Main {
         doSth2.setNextInChain(doSth3);
 
         doSth.execute();
-
 
         askForInput();
 
@@ -48,33 +54,71 @@ public class Main {
         while(!input.equals("done")){
             HashMap<String,String> keyValues = new HashMap<>();
             String[] info = input.split(",");
-            for(int i = 1 ; i < info.length;i++) {
+            for(int i = 2 ; i < info.length;i++) {
                 String[] keyValue = info[i].split(":");
                 String key = keyValue[0];
                 String value = keyValue[1];
                 keyValues.put(key,value);
             }
 
-            if(input.startsWith("c")){
-                Clas clas = clasMapper.map(keyValues);
-                classes.add(clas);
-            }else if(input.startsWith("s")) {
-                Student s = studentMapper.map(keyValues);
-                Clas c = null;
-                try {
-                    c = getClass(s.getClassName());
-                    c.addStudent(s);
-                } catch (NoClasFound noClasFound) {
-                    System.out.println("Enter teacher name for class : "+ noClasFound.getMissingClassName());
-                    String teacherName = scanner.next();
-                    Clas clas = new Clas();
-                    clas.setName(noClasFound.getMissingClassName());
-                    clas.setTeacherName(teacherName);
-                    clas.addStudent(s);
-                    classes.add(clas);
-                }
-            }
+            String[] dataInput = input.split(",");
 
+            //create,c,ssss
+            //update,s...
+            if(input.startsWith("create")) {
+
+                if (dataInput[1].equals("c")) {
+                    Clas clas = clasMapper.map(keyValues);
+                    classes.add(clas);
+                } else if (dataInput[1].equals("s")) {
+                    try {
+                        createStudent.execute(keyValues);
+                    } catch (WrongDataException e) {
+
+                    }
+                }
+            }else if(input.startsWith("update")){
+
+                if (dataInput[1].equals("c")) {
+                    Clas clas = clasMapper.map(keyValues);
+                    for(int i = 0 ; i < classes.size();i++){
+                        if(classes.get(i).getName().equals(clas.getName())){
+                            classes.set(i,clas);
+                            break;
+                        }
+                    }
+
+                }else if(dataInput[1].equals("s")){
+                    Student student = studentMapper.map(keyValues);
+                    try {
+                        Clas c = getClass(student.getClassName());
+
+                        List<Student> students = c.getStudents();
+                        for(int i =0;i < students.size();i++){
+
+                            if(students.get(i).getName().equals(student.getName())){
+                                students.set(i,student);
+
+                                c.setStudents(students);
+                                for(int j = 0 ; j < classes.size();j++){
+                                    if(classes.get(j).getName().equals(c.getName())){
+                                        classes.set(j,c);
+                                    }
+                                }
+                                break;
+                            }
+
+                        }
+
+                    } catch (NoClasFound noClasFound) {
+                    }
+                }
+
+            }else if(input.startsWith("delete")){
+
+
+
+            }
             input = scanner.next();
 
         }
