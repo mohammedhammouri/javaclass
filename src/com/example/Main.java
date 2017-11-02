@@ -7,11 +7,21 @@ import com.example.cor.Sth;
 import com.example.mapper.ClasMapper;
 import com.example.mapper.Mapper;
 import com.example.mapper.StudentMapper;
+import com.example.usecase.CreateClas;
 import com.example.usecase.CreateStudent;
+import com.example.usecase.Get;
 import com.example.usecase.GetClass;
+import com.example.usecase.GetStudent;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,18 +34,51 @@ public class Main {
     private static GetClass getClass =
             new GetClass(classes);
     private static CreateStudent createStudent =
-            new CreateStudent(classes,studentMapper,scanner,getClass);
+            new CreateStudent(classes, studentMapper, scanner, getClass);
+    private static CreateClas createClas
+            = new CreateClas(classes);
+    private static GetStudent getStudent
+            = new GetStudent(classes);
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws IOException {
+//        Sth doSth = new DoSth();
+//        Sth doSth2 = new DoSth2();
+//        Sth doSth3 = new DoSth3();
+//
+//        doSth.setNextInChain(doSth2);
+//        doSth2.setNextInChain(doSth3);
+//
+//        doSth.execute();
 
-        Sth doSth = new DoSth();
-        Sth doSth2 = new DoSth2();
-        Sth doSth3 = new DoSth3();
 
-        doSth.setNextInChain(doSth2);
-        doSth2.setNextInChain(doSth3);
+        GetClass getClass = new GetClass(classes);
+        try {
+            getClass.execute("fdfd");
+            getClass.execute("sss");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        doSth.execute();
+        Get get = new Get();
+        try {
+            get.execute("ddd", classes);
+            get.execute("dddssss", classes);
+            get.execute("dddssss", classes);
+            get.execute("dddssss", classes);
+            get.execute("dddssss", classes);
+            get.execute("dddssss", classes);
+        } catch (NoClasFound noClasFound) {
+            noClasFound.printStackTrace();
+        }
+
+
+        try {
+            Student student = getStudent.execute("ddd");
+            if(student != null)
+                System.out.println(student);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         askForInput();
 
@@ -47,25 +90,25 @@ public class Main {
         }
     }
 
-    private static void askForInput(){
+    private static void askForInput() {
 
         String input = scanner.next();
 
-        while(!input.equals("done")){
-            HashMap<String,String> keyValues = new HashMap<>();
+        while (!input.equals("done")) {
+            HashMap<String, String> keyValues = new HashMap<>();
             String[] info = input.split(",");
-            for(int i = 2 ; i < info.length;i++) {
+            for (int i = 2; i < info.length; i++) {
                 String[] keyValue = info[i].split(":");
                 String key = keyValue[0];
                 String value = keyValue[1];
-                keyValues.put(key,value);
+                keyValues.put(key, value);
             }
 
             String[] dataInput = input.split(",");
 
             //create,c,ssss
             //update,s...
-            if(input.startsWith("create")) {
+            if (input.startsWith("create")) {
 
                 if (dataInput[1].equals("c")) {
                     Clas clas = clasMapper.map(keyValues);
@@ -77,32 +120,32 @@ public class Main {
 
                     }
                 }
-            }else if(input.startsWith("update")){
+            } else if (input.startsWith("update")) {
 
                 if (dataInput[1].equals("c")) {
                     Clas clas = clasMapper.map(keyValues);
-                    for(int i = 0 ; i < classes.size();i++){
-                        if(classes.get(i).getName().equals(clas.getName())){
-                            classes.set(i,clas);
+                    for (int i = 0; i < classes.size(); i++) {
+                        if (classes.get(i).getName().equals(clas.getName())) {
+                            classes.set(i, clas);
                             break;
                         }
                     }
 
-                }else if(dataInput[1].equals("s")){
+                } else if (dataInput[1].equals("s")) {
                     Student student = studentMapper.map(keyValues);
                     try {
                         Clas c = getClass(student.getClassName());
 
                         List<Student> students = c.getStudents();
-                        for(int i =0;i < students.size();i++){
+                        for (int i = 0; i < students.size(); i++) {
 
-                            if(students.get(i).getName().equals(student.getName())){
-                                students.set(i,student);
+                            if (students.get(i).getName().equals(student.getName())) {
+                                students.set(i, student);
 
                                 c.setStudents(students);
-                                for(int j = 0 ; j < classes.size();j++){
-                                    if(classes.get(j).getName().equals(c.getName())){
-                                        classes.set(j,c);
+                                for (int j = 0; j < classes.size(); j++) {
+                                    if (classes.get(j).getName().equals(c.getName())) {
+                                        classes.set(j, c);
                                     }
                                 }
                                 break;
@@ -114,8 +157,7 @@ public class Main {
                     }
                 }
 
-            }else if(input.startsWith("delete")){
-
+            } else if (input.startsWith("delete")) {
 
 
             }
@@ -127,10 +169,10 @@ public class Main {
 
 
     private static Clas getClass(String className) throws NoClasFound {
-        for(int i = 0 ; i < classes.size();i++){
+        for (int i = 0; i < classes.size(); i++) {
 
             Clas c = classes.get(i);
-            if(c.getName().equals(className))
+            if (c.getName().equals(className))
                 return c;
 
         }

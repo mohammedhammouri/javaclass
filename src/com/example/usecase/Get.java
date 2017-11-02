@@ -5,18 +5,9 @@ import com.example.NoClasFound;
 
 import java.util.List;
 
-public class GetClass implements UseCase<String,Clas> {
-    private List<Clas> classes;
+public class Get {
 
-//    private final List<Clas> classes;
-//
-    public GetClass(List<Clas> classes) {
-        this.classes = classes;
-    }
-
-    @Override
-    public Clas execute(String className) throws Exception {
-
+    public Clas execute(String className, List<Clas> classes) throws NoClasFound {
         for(int i = 0 ; i < classes.size();i++){
 
             Clas c = classes.get(i);
@@ -26,7 +17,6 @@ public class GetClass implements UseCase<String,Clas> {
         }
 
         throw new NoClasFound(className);
-
     }
 
 }
