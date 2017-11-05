@@ -2,22 +2,26 @@ package com.example;
 
 import java.util.List;
 
+
+/**
+ * A class containing a list of {@link Student}
+ */
 public class Clas {
 
     private String name;
     private String teacherName;
-    private List<Student> students;
+    private List<String> studentsNames;
 
-    public List<Student> getStudents() {
-        return students;
+    public List<String> getStudentsNames() {
+        return studentsNames;
     }
 
-    public void setStudents(List<Student> students) {
-        this.students = students;
+    public void setStudentsNames(List<String> studentsNames) {
+        this.studentsNames = studentsNames;
     }
 
-    public void addStudent(Student student){
-        students.add(student);
+    public void addStudentName(String studentName){
+        studentsNames.add(studentName);
     }
 
     public String getName() {
@@ -36,12 +40,13 @@ public class Clas {
         this.teacherName = teacherName;
     }
 
+
     @Override
     public String toString() {
         return "Clas{" +
                 "name='" + name + '\'' +
                 ", teacherName='" + teacherName + '\'' +
-                ", students=" + students +
+                ", studentsNames=" + studentsNames +
                 '}';
     }
 
@@ -53,16 +58,15 @@ public class Clas {
         Clas clas = (Clas) o;
 
         if (name != null ? !name.equals(clas.name) : clas.name != null) return false;
-        if (teacherName != null ? !teacherName.equals(clas.teacherName) : clas.teacherName != null)
-            return false;
-        return students != null ? students.equals(clas.students) : clas.students == null;
+        if (teacherName != null ? !teacherName.equals(clas.teacherName) : clas.teacherName != null) return false;
+        return studentsNames != null ? studentsNames.equals(clas.studentsNames) : clas.studentsNames == null;
     }
 
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (teacherName != null ? teacherName.hashCode() : 0);
-        result = 31 * result + (students != null ? students.hashCode() : 0);
+        result = 31 * result + (studentsNames != null ? studentsNames.hashCode() : 0);
         return result;
     }
 }

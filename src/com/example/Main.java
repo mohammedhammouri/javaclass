@@ -27,7 +27,10 @@ import java.util.Scanner;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
+
     public static List<Clas> classes = new ArrayList<>();
+    public static List<Student> students = new ArrayList<>();
+
     private static ClasMapper clasMapper = new ClasMapper();
     private static StudentMapper studentMapper = new StudentMapper();
 
@@ -123,13 +126,7 @@ public class Main {
             } else if (input.startsWith("update")) {
 
                 if (dataInput[1].equals("c")) {
-                    Clas clas = clasMapper.map(keyValues);
-                    for (int i = 0; i < classes.size(); i++) {
-                        if (classes.get(i).getName().equals(clas.getName())) {
-                            classes.set(i, clas);
-                            break;
-                        }
-                    }
+
 
                 } else if (dataInput[1].equals("s")) {
                     Student student = studentMapper.map(keyValues);

@@ -5,6 +5,9 @@ import com.example.NoClasFound;
 
 import java.util.List;
 
+/**
+ * Wrong implemntation of {@link GetClass}
+ */
 public class Get {
 
     public Clas execute(String className, List<Clas> classes) throws NoClasFound {
