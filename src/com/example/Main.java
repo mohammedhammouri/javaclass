@@ -36,12 +36,12 @@ public class Main {
 
     private static GetClass getClass =
             new GetClass(classes);
-    private static CreateStudent createStudent =
-            new CreateStudent(classes, studentMapper, scanner, getClass);
-    private static CreateClas createClas
-            = new CreateClas(classes);
-    private static GetStudent getStudent
-            = new GetStudent(classes);
+    private static CreateStudent createStudent;
+//            new CreateStudent(classes, studentMapper, scanner, getClass);
+    private static CreateClas createClas;
+//            = new CreateClas(classes);
+    private static GetStudent getStudent;
+//            = new GetStudent(classes);
 
     public static void main(String[] args) throws IOException {
 //        Sth doSth = new DoSth();
@@ -109,55 +109,6 @@ public class Main {
 
             String[] dataInput = input.split(",");
 
-            //create,c,ssss
-            //update,s...
-            if (input.startsWith("create")) {
-
-                if (dataInput[1].equals("c")) {
-                    Clas clas = clasMapper.map(keyValues);
-                    classes.add(clas);
-                } else if (dataInput[1].equals("s")) {
-                    try {
-                        createStudent.execute(keyValues);
-                    } catch (WrongDataException e) {
-
-                    }
-                }
-            } else if (input.startsWith("update")) {
-
-                if (dataInput[1].equals("c")) {
-
-
-                } else if (dataInput[1].equals("s")) {
-                    Student student = studentMapper.map(keyValues);
-                    try {
-                        Clas c = getClass(student.getClassName());
-
-                        List<Student> students = c.getStudents();
-                        for (int i = 0; i < students.size(); i++) {
-
-                            if (students.get(i).getName().equals(student.getName())) {
-                                students.set(i, student);
-
-                                c.setStudents(students);
-                                for (int j = 0; j < classes.size(); j++) {
-                                    if (classes.get(j).getName().equals(c.getName())) {
-                                        classes.set(j, c);
-                                    }
-                                }
-                                break;
-                            }
-
-                        }
-
-                    } catch (NoClasFound noClasFound) {
-                    }
-                }
-
-            } else if (input.startsWith("delete")) {
-
-
-            }
             input = scanner.next();
 
         }
