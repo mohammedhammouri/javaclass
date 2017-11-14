@@ -1,5 +1,10 @@
 package com.example.threading;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
 public class ThreadMain {
 
 
@@ -18,39 +23,39 @@ public class ThreadMain {
         }
     };
 
-
-    static MyRunnable myRunnable = new MyRunnable(new Callback() {
+    static Callback c = new Callback() {
         @Override
         public void done(String s) {
-
             System.out.println("From callback : " + Thread.currentThread().getName());
             System.out.println("Recivied event : " + s);
         }
-    });
+    };
+
+    static MyRunnable myRunnable = new MyRunnable(c);
 
 
     public static void main(String[] args) {
-
-
-//        System.out.println(Thread.currentThread().getName());
-//        runnable.run();
-//
-//        Thread thread = new Thread(runnable,"SomeThread");
-//        thread.start();
-//
+//        Thread t = new Thread(myRunnable);
 //        myRunnable.run();
-
-        Thread t = new Thread(myRunnable,"ss");
-        t.start();
-
-//        Thread g = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                System.out.println(Thread.currentThread().getName());
-//            }
-//        });
 //
-//        g.start();
+//        t.start();
+
+
+        ExecutorService executor = Executors.newFixedThreadPool(5);
+        Future<String> future = executor.submit(myRunnable);
+
+        ///
+        //
+        //
+        ///
+
+        try {
+            future.get();
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+        } catch (ExecutionException e) {
+            System.out.println(e.getMessage());
+        }
 
 
 
