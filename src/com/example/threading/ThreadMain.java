@@ -1,9 +1,6 @@
 package com.example.threading;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 public class ThreadMain {
 
@@ -33,31 +30,48 @@ public class ThreadMain {
 
     static MyRunnable myRunnable = new MyRunnable(c);
 
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
 //        Thread t = new Thread(myRunnable);
 //        myRunnable.run();
 //
 //        t.start();
 
+        ExecutorService executor = Executors.newFixedThreadPool(100);
+//
+//        Callable<String> c = new Callable<String>() {
+//            @Override
+//            public String call() throws Exception {
+//                Thread.sleep(2000);
+//                return "SomeCode";
+//            }
+//        };
+//
+//        Future<String> result = executor.submit(c);
 
-        ExecutorService executor = Executors.newFixedThreadPool(5);
-        Future<String> future = executor.submit(myRunnable);
+//        Thread.sleep(2000);
+//        System.out.println("SomeCode");
+
+//        System.out.println("Something");
+//        System.out.println("Something2");
+//        System.out.println("Something3");
+//
+//        System.out.println(result.get());
+//
+//        System.out.println("Done");
+
+        Counter counter = new Counter();
 
 
-        //
-        //
-        //
-        //
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                counter.increaseCount();
+            }
+        };
 
-        try {
-            future.get();
-        } catch (InterruptedException e) {
-            System.out.println(e.getMessage());
-        } catch (ExecutionException e) {
-            System.out.println(e.getMessage());
+        for(int i = 0;i < 100;i++){
+            executor.submit(runnable);
         }
-
 
 
     }
