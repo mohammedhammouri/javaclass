@@ -20,23 +20,24 @@ public class ThreadMain {
         }
     };
 
-    static Callback c = new Callback() {
-        @Override
-        public void done(String s) {
-            System.out.println("From callback : " + Thread.currentThread().getName());
-            System.out.println("Recivied event : " + s);
-        }
-    };
+//    static Callback c = new Callback() {
+//        @Override
+//        public void done(String s) {
+//            System.out.println("From callback : " + Thread.currentThread().getName());
+//            System.out.println("Recivied event : " + s);
+//        }
+//    };
 
-    static MyRunnable myRunnable = new MyRunnable(c);
+//    static MyRunnable myRunnable = new MyRunnable(c);
 
+    static Counter c;
     public static void main(String[] args) throws InterruptedException, ExecutionException {
 //        Thread t = new Thread(myRunnable);
 //        myRunnable.run();
 //
 //        t.start();
 
-        ExecutorService executor = Executors.newFixedThreadPool(100);
+//        ExecutorService executor = Executors.newFixedThreadPool(100);
 //
 //        Callable<String> c = new Callable<String>() {
 //            @Override
@@ -59,21 +60,55 @@ public class ThreadMain {
 //
 //        System.out.println("Done");
 
-        Counter counter = new Counter();
+
+//        Runnable runnable = new Runnable() {
+//            @Override
+//            public void run() {
+//                counter.increaseCount();
+//            }
+//        };
+//
+//        for(int i = 0;i < 100;i++){
+//            executor.submit(runnable);
+//        }
 
 
-        Runnable runnable = new Runnable() {
+        String s = someMethod();
+
+        System.out.println(s);
+
+        String s2 = someMethod2(s);
+
+        someMethod(new Callback() {
             @Override
-            public void run() {
-                counter.increaseCount();
+            public void done(String s) {
+                System.out.println(s);
+                someMethod2(s, new Callback() {
+                    @Override
+                    public void done(String s) {
+
+                    }
+                });
             }
-        };
+        });
 
-        for(int i = 0;i < 100;i++){
-            executor.submit(runnable);
-        }
+    }
 
+    public static String someMethod(){
+        return "something";
+    }
 
+    public static String someMethod2(String s){
+        return s;
+    }
+
+    public static void someMethod(Callback c){
+        /////////
+        c.done("something");
+    }
+
+    public static void someMethod2(String s,Callback c){
+        c.done(s);
     }
 
 
