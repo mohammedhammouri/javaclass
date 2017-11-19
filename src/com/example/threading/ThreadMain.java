@@ -86,7 +86,7 @@ public class ThreadMain {
                 someMethod2(s, new Callback() {
                     @Override
                     public void done(String s) {
-
+//
                     }
                 });
             }
