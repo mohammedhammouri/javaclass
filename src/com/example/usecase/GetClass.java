@@ -1,6 +1,7 @@
 package com.example.usecase;
 
 import com.example.Clas;
+import com.example.MissingDataException;
 import com.example.NoClasFound;
 
 import java.util.List;

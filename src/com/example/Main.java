@@ -18,12 +18,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
@@ -98,7 +93,10 @@ public class Main {
         String input = scanner.next();
 
         while (!input.equals("done")) {
+
             HashMap<String, String> keyValues = new HashMap<>();
+
+            //c,s,name:fdfs,fdfd:fdf
             String[] info = input.split(",");
             for (int i = 2; i < info.length; i++) {
                 String[] keyValue = info[i].split(":");
@@ -107,7 +105,12 @@ public class Main {
                 keyValues.put(key, value);
             }
 
-            String[] dataInput = input.split(",");
+            try {
+                createClas.execute(keyValues);
+            }
+            catch (Exception e) {
+
+            }
 
             input = scanner.next();
 

@@ -10,6 +10,12 @@ public class GetStudentsInClas implements UseCase<String,List<Student>> {
 
     private GetClass getClass;
     private GetStudent getStudent;
+
+    public GetStudentsInClas(GetClass getClass, GetStudent getStudent) {
+        this.getClass = getClass;
+        this.getStudent = getStudent;
+    }
+
     @Override
     public List<Student> execute(String s) throws Exception {
         Clas c = getClass.execute(s);
