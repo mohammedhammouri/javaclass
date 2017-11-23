@@ -1,8 +1,6 @@
 package com.example.threading;
 
-import java.util.concurrent.Callable;
-
-public class MyRunnable implements Callable<String> {
+public class MyRunnable implements Runnable {
 
     private ThreadMain.Callback callback;
 
@@ -10,16 +8,18 @@ public class MyRunnable implements Callable<String> {
         this.callback = callback;
     }
 
-//    @Override
-//    public void run() {
-//
-//
-//    }
+    public void setCallback(ThreadMain.Callback callback) {
+        this.callback = callback;
+    }
+
 
     @Override
-    public String call() throws Exception {
-        System.out.println("From runnable : "+ Thread.currentThread().getName());
-
-        return "something";
+    public void run() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+        }
+        System.out.println(Thread.currentThread().getName());
+        callback.done("Something");
     }
 }

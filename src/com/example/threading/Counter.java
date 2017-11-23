@@ -12,12 +12,12 @@ public class Counter {
         this.s = s;
     }
 
+
     private Counter(Builder builder) {
         this.count = builder.count;
 //        this.count = com.google.common.base.Preconditions.checkNotNull(builder.count);
         this.s = builder.s;
     }
-
 
     public int getCount() {
         return count;
@@ -36,6 +36,13 @@ public class Counter {
 
     public Counter withCount2(int count){
         return new Counter(count,getS().get());
+    }
+
+    public Counter withCount3(int count){
+        return new Builder()
+                .fromPrototype(this)
+                .count(count)
+                .build();
     }
 
     public static class Builder {
@@ -63,5 +70,7 @@ public class Counter {
         }
 
     }
+
+
 }
 

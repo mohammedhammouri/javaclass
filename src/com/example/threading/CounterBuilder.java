@@ -13,4 +13,9 @@ public class CounterBuilder {
         this.s = s;
         return this;
     }
+
+    public Counter build(){
+        return new Counter(count,s);
+    }
+
 }

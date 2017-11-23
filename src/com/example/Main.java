@@ -7,11 +7,7 @@ import com.example.cor.Sth;
 import com.example.mapper.ClasMapper;
 import com.example.mapper.Mapper;
 import com.example.mapper.StudentMapper;
-import com.example.usecase.CreateClas;
-import com.example.usecase.CreateStudent;
-import com.example.usecase.Get;
-import com.example.usecase.GetClass;
-import com.example.usecase.GetStudent;
+import com.example.usecase.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -47,7 +43,6 @@ public class Main {
 //        doSth2.setNextInChain(doSth3);
 //
 //        doSth.execute();
-
 
         GetClass getClass = new GetClass(classes);
         try {
@@ -106,7 +101,7 @@ public class Main {
             }
 
             try {
-                createClas.execute(keyValues);
+                Main.createClas.execute(keyValues);
             }
             catch (Exception e) {
 
