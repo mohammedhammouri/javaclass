@@ -154,7 +154,7 @@ public class ThreadMain {
 
 
         Observable<String> fdfdf = method("fdfdf");
-
+//
         fdfdf.flatMap(new Function<String, ObservableSource<Integer>>() {
             @Override
             public ObservableSource<Integer> apply(String s) throws Exception {
