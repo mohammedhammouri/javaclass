@@ -57,6 +57,7 @@ try {
 
             }
         }
+        // هاد الميثود كيف بشتغل يعني الاوبجكت c كيف هيوصل getClassname
     }private static clas getClass(String className) throws NoChasFound {
         for (int i = 0; i < classes.size(); i++) {
 

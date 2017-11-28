@@ -41,6 +41,7 @@ private  final List<student> students=new ArrayList<>();
             throw new wrongDataexception("name length must be less than 20","name");
         students.add(s);
 
+//   هاد الشي ليه اعملناه ازا هو ضاف STUDENT شو بدنا بالCLASS   <فاهمه الطريقه بس ليه اعملناه>
         clas c = null;
         try {
             c = getClass.execute(s.getClassName);
@@ -54,7 +55,7 @@ private  final List<student> students=new ArrayList<>();
             clas.setClassName(noClasFound.getMissingclasname());
                 HashMap<String,String> clasData=clasMapper.mapTo(c);
                 clas c2=createClas.execute(clasData);
-c2.AddStudentName(s.getName());
+             c2.AddStudentName(s.getName());
           HashMap<String,String> update=clasMapper.mapTo(c);
           Update.execute(update);}
   return s;  }
