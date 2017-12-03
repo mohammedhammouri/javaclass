@@ -4,6 +4,9 @@ import com.example.cor.DoSth;
 import com.example.cor.DoSth2;
 import com.example.cor.DoSth3;
 import com.example.cor.Sth;
+import com.example.factory.CreateClasFactory;
+import com.example.factory.Factory;
+import com.example.factory.FactoryOfFactories;
 import com.example.mapper.ClasMapper;
 import com.example.mapper.Mapper;
 import com.example.mapper.StudentMapper;
@@ -27,10 +30,15 @@ public class Main {
 
     private static GetClass getClass =
             new GetClass(classes);
-    private static CreateStudent createStudent;
-//            new CreateStudent(classes, studentMapper, scanner, getClass);
-    private static CreateClas createClas;
-//            = new CreateClas(classes);
+
+    private static Factory<Object> createClasFactory =
+            FactoryOfFactories.getFactory("createClas");
+
+//    private static CreateClas createClas =
+//            new CreateClas(classes);
+//    private static CreateStudent createStudent
+//            = new CreateStudent();
+
     private static GetStudent getStudent;
 //            = new GetStudent(classes);
 
@@ -43,6 +51,8 @@ public class Main {
 //        doSth2.setNextInChain(doSth3);
 //
 //        doSth.execute();
+
+        CreateClas createClas = createClasFactory.get();
 
         GetClass getClass = new GetClass(classes);
         try {

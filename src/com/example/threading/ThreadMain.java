@@ -1,5 +1,8 @@
 package com.example.threading;
 
+import com.example.factory.CreateClasFactory;
+import com.example.usecase.CreateClas;
+import com.example.usecase.GetClass;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -10,8 +13,13 @@ import io.reactivex.functions.Function;
 import java.util.Optional;
 import java.util.concurrent.*;
 
+import static com.example.Main.classes;
+
 public class ThreadMain {
 
+
+    private static CreateClasFactory createClasFactory =
+            new CreateClasFactory();
 
     static interface Callback{
 
@@ -53,6 +61,7 @@ public class ThreadMain {
 //    static Counter c;
     public static void main(String[] args) throws InterruptedException, ExecutionException {
 
+        CreateClas createClas = createClasFactory.get();
 
 //        MyRunnable myRunnable = new MyRunnable(c);
 //        myRunnable.run();
