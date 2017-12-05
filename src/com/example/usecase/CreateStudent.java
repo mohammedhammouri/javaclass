@@ -6,6 +6,7 @@ import com.example.Student;
 import com.example.WrongDataException;
 import com.example.mapper.ClasMapper;
 import com.example.mapper.StudentMapper;
+import com.example.repo.StudentsRepo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +15,7 @@ import java.util.Scanner;
 
 public class CreateStudent implements UseCase<HashMap<String,String>,Student>{
 
-    private final List<Student> students;
+    private final StudentsRepo studentsRepo;
     private final StudentMapper studentMapper;
     private final Scanner scanner;
     private final GetClass getClass;
@@ -22,8 +23,8 @@ public class CreateStudent implements UseCase<HashMap<String,String>,Student>{
     private final ClasMapper clasMapper;
     private final UpdateClas updateClas;
 
-    public CreateStudent(List<Student> students, StudentMapper studentMapper, Scanner scanner, GetClass getClass, CreateClas createClas, ClasMapper clasMapper, UpdateClas updateClas) {
-        this.students = students;
+    public CreateStudent(StudentsRepo studentsRepo, StudentMapper studentMapper, Scanner scanner, GetClass getClass, CreateClas createClas, ClasMapper clasMapper, UpdateClas updateClas) {
+        this.studentsRepo = studentsRepo;
         this.studentMapper = studentMapper;
         this.scanner = scanner;
         this.getClass = getClass;
@@ -40,7 +41,7 @@ public class CreateStudent implements UseCase<HashMap<String,String>,Student>{
         if(s.getName().length() > 20)
             throw new WrongDataException("Name length must be less than 20","name");
 
-        students.add(s);
+        studentsRepo.create(s);
 
         Clas c = null;
         try {

@@ -2,6 +2,7 @@ package com.example.usecase;
 
 import com.example.Clas;
 import com.example.Student;
+import com.example.repo.StudentsRepo;
 
 import java.util.List;
 
@@ -10,10 +11,10 @@ import java.util.List;
  */
 public class GetStudent implements UseCase<String,Student> {
 
-    private final List<Student> students;
+    private final StudentsRepo studentsRepo;
 
-    public GetStudent(List<Student> students) {
-        this.students = students;
+    public GetStudent(StudentsRepo studentsRepo) {
+        this.studentsRepo = studentsRepo;
     }
 
     /**
@@ -27,28 +28,8 @@ public class GetStudent implements UseCase<String,Student> {
         if(s == null || s.isEmpty())
             throw new Exception("Null data");
 
-        for (int i = 0; i < students.size(); i++) {
-            Student st = students.get(i);
-            if(st.getName().equals(s)){
-                return st;
-            }
-        }
+        return studentsRepo.get(s);
 
-
-
-//        for (int i = 0; i < classes.size(); i++) {
-//            Clas c = classes.get(i);
-//
-//            for (int j = 0; j < c.getStudents().size(); j++) {
-//               Student student = c.getStudents().get(j);
-//               if(student.getName().equals(s))
-//                   return student;
-//            }
-//
-//        }
-
-
-        throw new Exception("No student found");
     }
 
 

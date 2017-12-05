@@ -4,4 +4,6 @@ public interface Factory<R> {
 
     R get();
 
+    void setTest(boolean test);
+
 }

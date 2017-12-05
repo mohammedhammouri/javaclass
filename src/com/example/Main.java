@@ -7,9 +7,11 @@ import com.example.cor.Sth;
 import com.example.factory.CreateClasFactory;
 import com.example.factory.Factory;
 import com.example.factory.FactoryOfFactories;
+import com.example.factory.StudentsRepoFactory;
 import com.example.mapper.ClasMapper;
 import com.example.mapper.Mapper;
 import com.example.mapper.StudentMapper;
+import com.example.repo.StudentsRepo;
 import com.example.usecase.*;
 
 import java.io.BufferedReader;
@@ -31,13 +33,13 @@ public class Main {
     private static GetClass getClass =
             new GetClass(classes);
 
-    private static Factory<Object> createClasFactory =
-            FactoryOfFactories.getFactory("createClas");
+    private static Factory<CreateClas> createClasFactory =
+            FactoryOfFactories.getFactory(CreateClas.class);
 
 //    private static CreateClas createClas =
 //            new CreateClas(classes);
-//    private static CreateStudent createStudent
-//            = new CreateStudent();
+//    private static CreateStudentFactory createStudent
+//            = new CreateStudentFactory();
 
     private static GetStudent getStudent;
 //            = new GetStudent(classes);
@@ -52,7 +54,18 @@ public class Main {
 //
 //        doSth.execute();
 
+
+
         CreateClas createClas = createClasFactory.get();
+
+        StudentsRepoFactory factory = FactoryOfFactories.getFactory(StudentsRepo.class);
+        factory.setTest(true);
+        StudentsRepo studentsRepo = factory.get();
+        factory.setTest(false);
+        StudentsRepo studentsRepo1 = factory.get();
+
+
+        UpdateClas updateClas = new UpdateClas(null,new ArrayList<Clas>());
 
         GetClass getClass = new GetClass(classes);
         try {

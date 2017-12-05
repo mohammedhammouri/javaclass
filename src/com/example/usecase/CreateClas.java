@@ -9,7 +9,6 @@ public class CreateClas implements UseCase<HashMap<String,String>,Clas>{
 
     private final List<Clas> classes;
 
-
     public CreateClas(List<Clas> classes) {
         this.classes = classes;
     }
