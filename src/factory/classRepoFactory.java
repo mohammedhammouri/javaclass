@@ -15,21 +15,16 @@ public class classRepoFactory implements Factory<ClassRepo> {
         this.test = test;
     }
 
+    @Override
+    public ClassRepo get() {
 
-    public ClassRepo getCLASREPO() {
-
-        if(getCLASREPO()==null)
+        if (classRepo == null)
             if (test) {
-                 classRepo= new INMERepo();
+                classRepo = new INMERepo();
             } else {
-               classRepo  = new DBCLASREMPO();
-            }
+                classRepo = new DBCLASREMPO();
+
+        }return classRepo;
+    }}
 
 
-
-
-
-
-        return classRepo;
-    }
-}
