@@ -7,7 +7,7 @@ import repo.ClassRepo;
 
 import java.util.List;
 
-public class classRepoFactory implements Factory {
+public class classRepoFactory implements Factory<ClassRepo> {
    private ClassRepo classRepo ;
     private boolean test ;
 

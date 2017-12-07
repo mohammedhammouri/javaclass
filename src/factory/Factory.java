@@ -1,5 +1,5 @@
 package factory;
 
-public interface Factory {
-
+public interface Factory<r> {
+ r get();
 }
