@@ -8,7 +8,7 @@ public interface ClassRepo {
     clas create (clas clas);
     clas update (String clasname,clas clas);
     clas remove (clas clas);
-    clas get(String clasname);
+    clas get(String clasname,clas clas);
     List <clas> getall();
     List <clas> quary (String clasname,String teacheerName);
 
