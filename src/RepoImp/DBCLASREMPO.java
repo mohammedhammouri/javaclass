@@ -50,9 +50,9 @@ public class DBCLASREMPO implements ClassRepo {
     @Override
     public List<clas> quary(String clasname, String teacherName) {
         //select * from clas where classname=""and teacherName=""
-
+        List <clas> finalResult =new ArrayList<>();
         for (int i = 0; i < classes.size(); i++) {
-            List <clas> finalResult =new ArrayList<>();
+
 
             if(classes.get(i).getClassName().equals(clasname)
                     ||classes.get(i).getTeacherName().equals(teacherName))
@@ -60,5 +60,5 @@ public class DBCLASREMPO implements ClassRepo {
 
 
         }
-return
-    }
+      return finalResult;
+    }}

@@ -51,15 +51,16 @@ public class INMERepo implements ClassRepo {
     @Override
     public List<clas> quary(String clasname, String teacherName) {
         //select * from clas where classname=""and teacherName=""
-
+        List <clas> finalResult =new ArrayList<>();
         for (int i = 0; i < classes.size(); i++) {
             if(classes.get(i).getClassName().equals(clasname)
                     ||classes.get(i).getTeacherName().equals(teacherName))
+                finalResult.add(classes.get(i));
 
 
 
         }
 
-
+        return finalResult;
     }
 }
