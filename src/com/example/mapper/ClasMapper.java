@@ -4,22 +4,29 @@ import com.example.Clas;
 import com.example.WrongDataException;
 
 import java.util.HashMap;
+import java.util.List;
 
-public class ClasMapper implements Mapper<HashMap<String,String>,Clas> {
+public class ClasMapper implements Mapper<HashMap<String,Object>,Clas> {
 
     @Override
-    public Clas map(HashMap<String, String> hashMap) {
+    public Clas map(HashMap<String, Object> hashMap) {
         Clas clas = new Clas();
-        clas.setName(hashMap.get("name"));
-        clas.setTeacherName(hashMap.get("teacherName"));
+        clas.setName((String) hashMap.get("name"));
+        clas.setTeacherName((String) hashMap.get("teacherName"));
+        clas.setStudentsNames((List<String>) hashMap.get("studentNames"));
         return clas;
     }
 
     @Override
-    public HashMap<String, String> mapTo(Clas clas) {
-        HashMap<String,String> map = new HashMap<>();
+    public HashMap<String, Object> mapTo(Clas clas) {
+        HashMap<String,Object> map = new HashMap<>();
         map.put("name",clas.getName());
         map.put("teacherName",clas.getTeacherName());
+        map.put("studentNames",clas.getStudentsNames());
         return map;
     }
+
+
+
+
 }

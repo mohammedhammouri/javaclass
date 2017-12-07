@@ -15,61 +15,17 @@ import java.util.Scanner;
 
 public class CreateStudent implements UseCase<HashMap<String,String>,Student>{
 
-    private final StudentsRepo studentsRepo;
-    private final StudentMapper studentMapper;
-    private final Scanner scanner;
-    private final GetClass getClass;
-    private final CreateClas createClas;
-    private final ClasMapper clasMapper;
-    private final UpdateClas updateClas;
-
-    public CreateStudent(StudentsRepo studentsRepo, StudentMapper studentMapper, Scanner scanner, GetClass getClass, CreateClas createClas, ClasMapper clasMapper, UpdateClas updateClas) {
-        this.studentsRepo = studentsRepo;
-        this.studentMapper = studentMapper;
-        this.scanner = scanner;
-        this.getClass = getClass;
-        this.createClas = createClas;
-        this.clasMapper = clasMapper;
-        this.updateClas = updateClas;
-    }
+    private StudentMapper studentMapper;
+    private StudentsRepo studentsRepo;
 
     @Override
     public Student execute(HashMap<String, String> hashMap) throws Exception {
         Student s = studentMapper.map(hashMap);
-        if(s.getName() == null)
-            throw new WrongDataException("null name","name");
-        if(s.getName().length() > 20)
-            throw new WrongDataException("Name length must be less than 20","name");
+
+        if(s.getClassName() == null)
+            throw new NullPointerException("dsds");
 
         studentsRepo.create(s);
-
-        Clas c = null;
-        try {
-            c = getClass.execute(s.getClassName());
-            c.addStudentName(s.getName());
-            updateClas.execute(clasMapper.mapTo(c));
-        } catch (NoClasFound noClasFound) {
-            System.out.println("Enter teacher name for class : " + noClasFound.getMissingClassName());
-            String teacherName = scanner.next();
-
-            Clas clas = new Clas();
-            clas.setName(noClasFound.getMissingClassName());
-            clas.setTeacherName(teacherName);
-
-            HashMap<String,String> clasData = clasMapper.mapTo(clas);
-
-            Clas clas1 = createClas.execute(clasData);
-
-            clas1.addStudentName(s.getName());
-
-//            HashMap<String,String> ss = clasMapper.mapTo(clas1);
-
-            updateClas.execute(clasMapper.mapTo(clas1));
-//            updateClas.execute(ss);
-
-        } catch (Exception e) {
-        }
-
 
         return s;
     }

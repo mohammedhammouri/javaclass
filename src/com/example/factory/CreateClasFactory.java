@@ -20,5 +20,12 @@ public class CreateClasFactory implements Factory<CreateClas>{
         return createClas;
     }
 
+    private boolean test;
+
+    @Override
+    public void setTest(boolean test) {
+        this.test = test;
+    }
+
 
 }

@@ -10,19 +10,16 @@ public class Clas {
 
     private String name;
     private String teacherName;
-    private List<String> studentsNames;
+    private List<Student> students;
 
-    public List<String> getStudentsNames() {
-        return studentsNames;
+    public List<Student> getStudents() {
+        return students;
     }
 
-    public void setStudentsNames(List<String> studentsNames) {
-        this.studentsNames = studentsNames;
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 
-    public void addStudentName(String studentName){
-        studentsNames.add(studentName);
-    }
 
     public String getName() {
         return name;

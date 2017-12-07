@@ -22,88 +22,11 @@ import java.io.PrintWriter;
 import java.util.*;
 
 public class Main {
-    static Scanner scanner = new Scanner(System.in);
 
-    public static List<Clas> classes = new ArrayList<>();
-    public static List<Student> students = new ArrayList<>();
 
-    private static ClasMapper clasMapper = new ClasMapper();
-    private static StudentMapper studentMapper = new StudentMapper();
-
-    private static GetClass getClass =
-            new GetClass(classes);
-
-    private static Factory<CreateClas> createClasFactory =
-            FactoryOfFactories.getFactory(CreateClas.class);
-
-//    private static CreateClas createClas =
-//            new CreateClas(classes);
-//    private static CreateStudentFactory createStudent
-//            = new CreateStudentFactory();
-
-    private static GetStudent getStudent;
-//            = new GetStudent(classes);
 
     public static void main(String[] args) throws IOException {
-//        Sth doSth = new DoSth();
-//        Sth doSth2 = new DoSth2();
-//        Sth doSth3 = new DoSth3();
-//
-//        doSth.setNextInChain(doSth2);
-//        doSth2.setNextInChain(doSth3);
-//
-//        doSth.execute();
-
-
-
-        CreateClas createClas = createClasFactory.get();
-
-        StudentsRepoFactory factory = FactoryOfFactories.getFactory(StudentsRepo.class);
-        factory.setTest(true);
-        StudentsRepo studentsRepo = factory.get();
-        factory.setTest(false);
-        StudentsRepo studentsRepo1 = factory.get();
-
-
-        UpdateClas updateClas = new UpdateClas(null,new ArrayList<Clas>());
-
-        GetClass getClass = new GetClass(classes);
-        try {
-            getClass.execute("fdfd");
-            getClass.execute("sss");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        Get get = new Get();
-        try {
-            get.execute("ddd", classes);
-            get.execute("dddssss", classes);
-            get.execute("dddssss", classes);
-            get.execute("dddssss", classes);
-            get.execute("dddssss", classes);
-            get.execute("dddssss", classes);
-        } catch (NoClasFound noClasFound) {
-            noClasFound.printStackTrace();
-        }
-
-
-        try {
-            Student student = getStudent.execute("ddd");
-            if(student != null)
-                System.out.println(student);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         askForInput();
-
-        classes.get(classes.size());
-
-        for (int i = 0; i < classes.size(); i++) {
-            Clas c = classes.get(i);
-            System.out.println(c);
-        }
     }
 
     private static void askForInput() {
