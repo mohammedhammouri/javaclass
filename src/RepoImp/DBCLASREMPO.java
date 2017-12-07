@@ -52,11 +52,13 @@ public class DBCLASREMPO implements ClassRepo {
         //select * from clas where classname=""and teacherName=""
 
         for (int i = 0; i < classes.size(); i++) {
+            List <clas> finalResult =new ArrayList<>();
+
             if(classes.get(i).getClassName().equals(clasname)
                     ||classes.get(i).getTeacherName().equals(teacherName))
-
+                  finalResult.add(classes.get(i));
 
 
         }
-
+return
     }

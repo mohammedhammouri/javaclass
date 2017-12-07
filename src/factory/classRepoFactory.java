@@ -8,7 +8,7 @@ import repo.ClassRepo;
 import java.util.List;
 
 public class classRepoFactory implements Factory {
-   private ClassRepo CLASREPO ;
+   private ClassRepo classRepo ;
     private boolean test ;
 
     public void setTest(boolean test) {
@@ -19,10 +19,10 @@ public class classRepoFactory implements Factory {
     public ClassRepo getCLASREPO() {
 
         if(getCLASREPO()==null)
-            if (test){
-                 ClassRepo = new INMERepo();}
-                else {
-               ClassRepo  = new DBCLASREMPO();
+            if (test) {
+                 classRepo= new INMERepo();
+            } else {
+               classRepo  = new DBCLASREMPO();
             }
 
 
@@ -30,6 +30,6 @@ public class classRepoFactory implements Factory {
 
 
 
-        return CLASREPO;
+        return classRepo;
     }
 }
