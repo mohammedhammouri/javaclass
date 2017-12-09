@@ -72,7 +72,7 @@ public class Main {
                     else if(info[1].equals("s"))
                         createStudent.execute(keyValues);
                 break;
-                case "u"://create
+                case "u"://update
                     if(info[1].equals("c"))
                         updateClas.execute(keyValues);
                     else if(info[1].equals("s"))
