@@ -1,6 +1,7 @@
 package com.example.mapper;
 
 import com.example.Clas;
+import com.example.Student;
 import com.example.WrongDataException;
 
 import java.util.HashMap;
@@ -13,7 +14,7 @@ public class ClasMapper implements Mapper<HashMap<String,Object>,Clas> {
         Clas clas = new Clas();
         clas.setName((String) hashMap.get("name"));
         clas.setTeacherName((String) hashMap.get("teacherName"));
-        clas.setStudentsNames((List<String>) hashMap.get("studentNames"));
+        clas.setStudents((List<Student>) hashMap.get("students"));
         return clas;
     }
 
@@ -22,7 +23,7 @@ public class ClasMapper implements Mapper<HashMap<String,Object>,Clas> {
         HashMap<String,Object> map = new HashMap<>();
         map.put("name",clas.getName());
         map.put("teacherName",clas.getTeacherName());
-        map.put("studentNames",clas.getStudentsNames());
+        map.put("students",clas.getStudents());
         return map;
     }
 

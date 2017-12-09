@@ -2,29 +2,25 @@ package com.example.usecase;
 
 import com.example.Clas;
 import com.example.mapper.ClasMapper;
+import com.example.repo.ClasRepo;
+import sun.nio.cs.ext.IBM037;
 
 import java.util.HashMap;
 import java.util.List;
 
-public class UpdateClas implements UseCase<HashMap<String,String>,Clas> {
+public class UpdateClas implements UseCase<HashMap<String,Object>,Clas> {
 
     private ClasMapper clasMapper;
-    private List<Clas> classes;
+    private ClasRepo clasRepo;
 
-    public UpdateClas(ClasMapper clasMapper, List<Clas> classes) {
+    public UpdateClas(ClasMapper clasMapper, ClasRepo clasRepo) {
         this.clasMapper = clasMapper;
-        this.classes = classes;
+        this.clasRepo = clasRepo;
     }
 
     @Override
-    public Clas execute(HashMap<String, String> keyValues) throws Exception {
+    public Clas execute(HashMap<String, Object> keyValues) throws Exception {
         Clas clas = clasMapper.map(keyValues);
-        for (int i = 0; i < classes.size(); i++) {
-            if (classes.get(i).getName().equals(clas.getName())) {
-                classes.set(i, clas);
-                break;
-            }
-        }
 
         return clas;
     }

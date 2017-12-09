@@ -1,26 +1,24 @@
 package com.example.usecase;
 
 import com.example.Clas;
+import com.example.mapper.ClasMapper;
+import com.example.repo.ClasRepo;
 
 import java.util.HashMap;
 import java.util.List;
 
-public class CreateClas implements UseCase<HashMap<String,String>,Clas>{
+public class CreateClas implements UseCase<HashMap<String,Object>,Clas>{
 
-    private final List<Clas> classes;
-
-    public CreateClas(List<Clas> classes) {
-        this.classes = classes;
-    }
+    private ClasMapper clasMapper;
+    private ClasRepo clasRepo;
 
     @Override
-    public Clas execute(HashMap<String, String> hashMap) throws Exception {
-        Clas clas = new Clas();
-        clas.setName(hashMap.get("name"));
-        clas.setTeacherName(hashMap.get("teacherName"));
+    public Clas execute(HashMap<String, Object> hashMap) throws Exception {
 
-        classes.add(clas);
+        Clas c = clasMapper.map(hashMap);
 
-        return clas;
+        return clasRepo.create(c);
     }
+
+
 }

@@ -23,19 +23,38 @@ import java.util.*;
 
 public class Main {
 
+    private static CreateClas createClas;
+    private static CreateStudent createStudent;
+    private static GetClass getClass;
+    private static GetStudent getStudent;
+    private static UpdateClas updateClas;
+    private static UpdateStudent updateStudent;
+    private static Scanner scanner;
 
 
     public static void main(String[] args) throws IOException {
-        askForInput();
+        createClas = FactoryOfFactories.getFactory(CreateClas.class).get();
+        createStudent = FactoryOfFactories.getFactory(CreateStudent.class).get();
+        getClass = FactoryOfFactories.getFactory(GetClass.class).get();
+        getStudent = FactoryOfFactories.getFactory(GetStudent.class).get();
+        updateClas = FactoryOfFactories.getFactory(UpdateClas.class).get();
+        updateStudent = FactoryOfFactories.getFactory(UpdateStudent.class).get();
+        scanner = FactoryOfFactories.getFactory(Scanner.class).get();
+
+        try {
+            askForInput();
+        } catch (Exception e) {
+            System.out.println("Some error happened : " + e.getMessage());
+        }
     }
 
-    private static void askForInput() {
+    private static void askForInput() throws Exception {
 
         String input = scanner.next();
 
         while (!input.equals("done")) {
 
-            HashMap<String, String> keyValues = new HashMap<>();
+            HashMap<String, Object> keyValues = new HashMap<>();
 
             //c,s,name:fdfs,fdfd:fdf
             String[] info = input.split(",");
@@ -46,30 +65,28 @@ public class Main {
                 keyValues.put(key, value);
             }
 
-            try {
-                Main.createClas.execute(keyValues);
-            }
-            catch (Exception e) {
+            switch (info[0]){
+                case "c"://create
+                    if(info[1].equals("c"))
+                        createClas.execute(keyValues);
+                    else if(info[1].equals("s"))
+                        createStudent.execute(keyValues);
+                break;
+                case "u"://create
+                    if(info[1].equals("c"))
+                        updateClas.execute(keyValues);
+                    else if(info[1].equals("s"))
+                        updateStudent.execute(keyValues);
+                    break;
 
             }
+
+
 
             input = scanner.next();
 
         }
 
-    }
-
-
-    private static Clas getClass(String className) throws NoClasFound {
-        for (int i = 0; i < classes.size(); i++) {
-
-            Clas c = classes.get(i);
-            if (c.getName().equals(className))
-                return c;
-
-        }
-
-        throw new NoClasFound(className);
     }
 
 

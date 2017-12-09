@@ -13,13 +13,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
-public class CreateStudent implements UseCase<HashMap<String,String>,Student>{
+public class CreateStudent implements UseCase<HashMap<String,Object>,Student>{
 
     private StudentMapper studentMapper;
     private StudentsRepo studentsRepo;
 
     @Override
-    public Student execute(HashMap<String, String> hashMap) throws Exception {
+    public Student execute(HashMap<String, Object> hashMap) throws Exception {
         Student s = studentMapper.map(hashMap);
 
         if(s.getClassName() == null)

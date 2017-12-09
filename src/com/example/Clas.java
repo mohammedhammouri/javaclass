@@ -43,9 +43,10 @@ public class Clas {
         return "Clas{" +
                 "name='" + name + '\'' +
                 ", teacherName='" + teacherName + '\'' +
-                ", studentsNames=" + studentsNames +
+                ", students=" + students +
                 '}';
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -56,14 +57,14 @@ public class Clas {
 
         if (name != null ? !name.equals(clas.name) : clas.name != null) return false;
         if (teacherName != null ? !teacherName.equals(clas.teacherName) : clas.teacherName != null) return false;
-        return studentsNames != null ? studentsNames.equals(clas.studentsNames) : clas.studentsNames == null;
+        return students != null ? students.equals(clas.students) : clas.students == null;
     }
 
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (teacherName != null ? teacherName.hashCode() : 0);
-        result = 31 * result + (studentsNames != null ? studentsNames.hashCode() : 0);
+        result = 31 * result + (students != null ? students.hashCode() : 0);
         return result;
     }
 }

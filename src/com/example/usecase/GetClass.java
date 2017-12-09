@@ -3,31 +3,27 @@ package com.example.usecase;
 import com.example.Clas;
 import com.example.MissingDataException;
 import com.example.NoClasFound;
+import com.example.repo.ClasRepo;
 
 import java.util.List;
 
 public class GetClass implements UseCase<String,Clas> {
-    private List<Clas> classes;
 
-//    private final List<Clas> classes;
-//
-    public GetClass(List<Clas> classes) {
-        this.classes = classes;
+    private ClasRepo clasRepo;
+
+    public GetClass(ClasRepo clasRepo) {
+        this.clasRepo = clasRepo;
     }
 
     @Override
     public Clas execute(String className) throws Exception {
 
-        for(int i = 0 ; i < classes.size();i++){
+        Clas c = clasRepo.get(className);
 
-            Clas c = classes.get(i);
-            if(c.getName().equals(className))
-                return c;
-
-        }
+        if(c != null)
+            return c;
 
         throw new NoClasFound(className);
-
     }
 
 }
