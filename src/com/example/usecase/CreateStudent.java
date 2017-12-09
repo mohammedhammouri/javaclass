@@ -18,6 +18,11 @@ public class CreateStudent implements UseCase<HashMap<String,Object>,Student>{
     private StudentMapper studentMapper;
     private StudentsRepo studentsRepo;
 
+    public CreateStudent(StudentMapper studentMapper, StudentsRepo studentsRepo) {
+        this.studentMapper = studentMapper;
+        this.studentsRepo = studentsRepo;
+    }
+
     @Override
     public Student execute(HashMap<String, Object> hashMap) throws Exception {
         Student s = studentMapper.map(hashMap);

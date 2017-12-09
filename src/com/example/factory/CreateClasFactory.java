@@ -1,30 +1,25 @@
 package com.example.factory;
 
 import com.example.Clas;
+import com.example.mapper.ClasMapper;
+import com.example.repo.ClasRepo;
 import com.example.usecase.CreateClas;
+import jdk.internal.dynalink.support.ClassMap;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateClasFactory implements Factory<CreateClas>{
+public class CreateClasFactory extends BaseFactory<CreateClas> {
 
-    private static List<Clas> clasList;
     private static CreateClas createClas;
 
     public CreateClas get(){
-        if(clasList == null)
-            clasList = new ArrayList<>();
         if(createClas == null)
-            createClas = new CreateClas(clasList);
+            createClas = new CreateClas(
+                    FactoryOfFactories.getFactory(ClasMapper.class).get()
+                    ,FactoryOfFactories.getFactory(ClasRepo.class).get());
 
         return createClas;
-    }
-
-    private boolean test;
-
-    @Override
-    public void setTest(boolean test) {
-        this.test = test;
     }
 
 

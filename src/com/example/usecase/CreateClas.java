@@ -12,6 +12,11 @@ public class CreateClas implements UseCase<HashMap<String,Object>,Clas>{
     private ClasMapper clasMapper;
     private ClasRepo clasRepo;
 
+    public CreateClas(ClasMapper clasMapper, ClasRepo clasRepo) {
+        this.clasMapper = clasMapper;
+        this.clasRepo = clasRepo;
+    }
+
     @Override
     public Clas execute(HashMap<String, Object> hashMap) throws Exception {
 

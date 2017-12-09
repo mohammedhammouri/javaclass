@@ -23,13 +23,8 @@ public class CreateStudentFactory extends BaseFactory<CreateStudent> {
 
         if(createStudent  == null)
             createStudent = new CreateStudent(
-                    FactoryOfFactories.getFactory(StudentsRepo.class).get(),
                     FactoryOfFactories.getFactory(StudentMapper.class).get(),
-                    FactoryOfFactories.getFactory(Scanner.class).get(),
-                    FactoryOfFactories.getFactory(GetClass.class).get(),
-                    FactoryOfFactories.getFactory(CreateClas.class).get(),
-                    FactoryOfFactories.getFactory(ClasMapper.class).get(),
-                    FactoryOfFactories.getFactory(UpdateClas.class).get()
+                    FactoryOfFactories.getFactory(StudentsRepo.class).get()
             );
 
 

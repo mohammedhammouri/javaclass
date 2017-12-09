@@ -3,23 +3,13 @@ package com.example.factory;
 import com.example.repo.StudentsRepo;
 import com.example.repo_impl.InMemeryStudentRepo;
 
-public class StudentsRepoFactory implements Factory<StudentsRepo> {
+public class StudentsRepoFactory extends BaseFactory<StudentsRepo> {
 
     private StudentsRepo studentsRepo;
-    private boolean test;
-    //unit testing
-
-
-    public void setTest(boolean test) {
-        this.test = test;
-    }
 
     @Override
     public StudentsRepo get() {
         if(studentsRepo == null) {
-            if(!test)
-                studentsRepo = new NetworkStudentRepo();
-            else
                 studentsRepo = new InMemeryStudentRepo();
         }
         return studentsRepo;
